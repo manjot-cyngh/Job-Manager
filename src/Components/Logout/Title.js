@@ -1,10 +1,10 @@
 import React from 'react'
 import logo from '../../Assets/faviconio-logo/logo.png'
 
-export default function Title() {
+export default function Title(props) {
   return (
     <div>
-      <img src={logo} style={{height:'20%', width:'20%', marginLeft: '5%'}}/>
+      <img src={logo} style={props.imgstyle}/>
     </div>
   )
 }
