@@ -1,0 +1,6 @@
+This logo was generated using the following font:
+
+- Font Title: Habibi
+- Font Author: Copyright (c) 2011, Sorkin Type Co (www.sorkintype.com) with Reserved Font Name "Habibi".
+- Font Source: http://fonts.gstatic.com/s/habibi/v21/CSR-4zFWkuqcTTNCShJeZOYySQ.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

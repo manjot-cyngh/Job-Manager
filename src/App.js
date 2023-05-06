@@ -1,10 +1,12 @@
-
+import Body from "./Components/Logout/Body";
+import Title from "./Components/Logout/Title";
 
 function App() {
   return (
-    <div>
-      Welcome to the job managament tool.
-    </div>
+    <>
+    <Title/>
+    <Body/>
+    </>
   );
 }
 
