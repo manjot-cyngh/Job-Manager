@@ -1,0 +1,35 @@
+export default  data = {
+    "job": [
+        {
+            "status": "pending",
+            "_id": "645121f141799825b43e2d3d",
+            "company": "google",
+            "position": "intern",
+            "createdBy": "644f8da0f86d6b04448c26b2",
+            "createdAt": "2023-05-02T14:45:05.986Z",
+            "updatedAt": "2023-05-02T14:45:05.986Z",
+            "__v": 0
+        },
+        {
+            "status": "pending",
+            "_id": "645236a437053a5a10db91e7",
+            "company": "uber",
+            "position": "back-end developer",
+            "createdBy": "644f8da0f86d6b04448c26b2",
+            "createdAt": "2023-05-03T10:25:40.514Z",
+            "updatedAt": "2023-05-03T10:25:40.514Z",
+            "__v": 0
+        },
+        {
+            "status": "pending",
+            "_id": "645236b837053a5a10db91e9",
+            "company": "microsoft",
+            "position": "software developer",
+            "createdBy": "644f8da0f86d6b04448c26b2",
+            "createdAt": "2023-05-03T10:26:00.941Z",
+            "updatedAt": "2023-05-03T10:26:00.941Z",
+            "__v": 0
+        }
+    ],
+    "count": 3
+}

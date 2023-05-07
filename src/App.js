@@ -1,17 +1,31 @@
 
-// import Login from "./Components/Logout/Auth/Login";
-import Register from "./Components/Logout/Auth/Register";
+// import Login from "./Components/Loggedout/Auth/Login";
+import Dashboard from './Components/Loggedin/Dashboard';
+import React from 'react';
+import Delete from './Components/Loggedin/Delete';
+import Edit from './Components/Loggedin/Edit';
+import Navbar from './Components/Loggedin/Navbar';
 
-// import Body from "./Components/Logout/Body";
-// import Title from "./Components/Logout/Title";
+
+// import Register from './Components/Loggedout/Auth/Register';
+
+import Body from "./Components/Loggedout/Body";
+import Title from "./Components/Loggedout/Title";
+
 
 function App() {
   return (
     <>
-    {/* <Title {height:'20%', width:'20%', marginLeft: '5%'}/> */}
-    {/* <Body/> */}
+
+    <Title imgstyle={{height:'20%', width:'20%', marginLeft: '5%'}}/>
+    <Body/>
     {/* <Login/> */}
-    <Register/>
+    {/* <Register/> */}
+    {/* <Navbar/> */}
+    {/* <Dashboard/> */}
+       {/* <Edit/> */}
+
+      {/* <Delete/> */}
     </>
   );
 }
