@@ -1,6 +1,7 @@
 import React from 'react';
 import {MDBContainer, MDBCol, MDBRow, MDBBtn,MDBInput } from 'mdb-react-ui-kit';
 import Title from '../Title'
+import { Link } from 'react-router-dom';
 
 export default function App() {
 
@@ -12,7 +13,7 @@ export default function App() {
       <MDBRow>
 
         <MDBCol col='10' md='6'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid me-5" alt="Sample image" />
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid me-5" alt="Sample image" />
         </MDBCol>
 
         <MDBCol col='4' md='6'>
@@ -29,7 +30,7 @@ export default function App() {
 
           <div className='text-center text-md-start mt-4 pt-2'>
             <MDBBtn className="mb-0 px-5" size='lg'>Register</MDBBtn>
-            <p className="small fw-bold mt-2 pt-1 mb-2">Already have an account? <a href="/auth/login" className="link-primary">Login</a></p>
+            <p className="small fw-bold mt-2 pt-1 mb-2">Already have an account? <Link to="/api/v1/auth/login" className="link-primary">Login</Link></p>
           </div>
 
         </MDBCol>

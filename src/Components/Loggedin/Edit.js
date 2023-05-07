@@ -1,10 +1,14 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Title from '../Loggedout/Title';
 
 
 export default function Edit() {
     return (
+        <>
+        
+        <Title imgstyle={{ height: '25%', width: '25%', marginLeft: '35%' }}/>
         <div
             className="modal show "
             style={{ display: 'inline-block', position: 'initial' }}
@@ -51,6 +55,7 @@ export default function Edit() {
                 </Modal.Footer>
             </Modal.Dialog>
         </div>
+        </>
     );
 }
 

@@ -1,8 +1,14 @@
 import React from 'react'
 import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
 import Title from '../Loggedout/Title'
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+    let naivgate = useNavigate()
+    const loggout = () => {
+        localStorage.removeItem('token')
+        naivgate('/')
+    }
     return (
         <>
             <div style={{ display: 'inline-block' }}>
@@ -13,7 +19,7 @@ export default function Navbar() {
                     user
                 </MDBDropdownToggle>
                 <MDBDropdownMenu  >
-                    <MDBDropdownItem link>Loggout</MDBDropdownItem>
+                    <MDBDropdownItem link onClick={loggout}>Loggout</MDBDropdownItem>
                 </MDBDropdownMenu>
             </MDBDropdown>
             

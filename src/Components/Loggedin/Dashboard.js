@@ -1,14 +1,13 @@
 import React from 'react'
 import edit from '../../Assets/edit.svg'
 import trash from '../../Assets/trash.svg'
-
-
+import Delete from './Delete'
 
 export default function Body() {
 
   return (
     <>
-    
+    <Delete/>
     <div style={{marginLeft: '280px'}}>
                 <form className="form-inline">
                     <div className='row'>
@@ -52,7 +51,7 @@ export default function Body() {
             <td>Otto</td>
             <td>@mdo</td>
             <td>@mdo</td>
-            <td><a  href='/edit'><img src={edit} /></a><a style={{marginLeft:'50px'}}  href='/'><img src={trash} /></a></td>
+            <td><a  href='/api/v1/jobs/:id'><img src={edit} /></a><a style={{marginLeft:'50px'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><img src={trash} /></a></td>
           </tr>
           <tr>
             <th scope="row">2</th>
