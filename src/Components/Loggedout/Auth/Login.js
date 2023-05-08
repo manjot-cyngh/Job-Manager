@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import Title from '../Title'
 import { Link, useNavigate } from 'react-router-dom';
-
+import { createdatacontext } from '../../../App';
 
 export default function App() {
-  
+  const {jobs, setjobs} = useContext(createdatacontext)
   const host = 'http//localhost:5000'
   let navigate = useNavigate()
   const handleSubmit = async (e) => {
@@ -18,7 +18,7 @@ export default function App() {
       const response = await fetch(`http://localhost:5000/api/v1/auth/login`, {
         method: 'POST',
         headers: {
-          "Content-type": "application/json"
+          "content-type": "application/json"
         },
         body: JSON.stringify({
           email: email,
@@ -38,8 +38,13 @@ export default function App() {
             Authorization: localStorage.getItem('token')
           },
         })
-        const data = await response.json()
-        console.log(data)
+        const res = await response.json()
+        await setjobs({count:res.count, jobs: res.job})
+        setjobs((state) => {
+          console.log(state); 
+          return state;
+        });
+        // console.log(jobs)
         navigate('/api/v1/jobs')
       }
       

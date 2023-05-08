@@ -1,13 +1,104 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import edit from '../../Assets/edit.svg'
 import trash from '../../Assets/trash.svg'
 import Delete from './Delete'
+import { createdatacontext } from '../../App'
+import { Link, useNavigate } from 'react-router-dom'
+import { createcompanycontext, createpositioncontext, createstatuscontext, createidcontext } from '../../App';
+
+const params = window.location.search
+const id = new URLSearchParams(params).get('id')
+
 
 export default function Body() {
+  const {jobs, setjobs} = useContext(createdatacontext)
+  const {position, setposition} = useContext(createpositioncontext)
+    const {company, setcompany} = useContext(createcompanycontext)
+    const {status, setstatus} = useContext(createstatuscontext)
+    const {id, setid} = useContext(createidcontext)
+  
+  
 
+  let navigate = useNavigate()
+  const getalljobs = async () => {
+    // e.preventDefault()
+    try {
+      const response = await fetch(`http://localhost:5000/api/v1/jobs`, {
+          method: 'GET',
+          headers: {
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem('token')
+          },
+        
+      })
+      const data = await response.json()
+    
+      await setjobs({count: data.count, jobs: data.job})
+      setjobs((state) => {
+         console.log(state); 
+         return state;
+        });
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+
+    getalljobs()
+  }, [])
+
+  const addJob = async (e) => {
+    e.preventDefault()
+    try {
+    const company = encodeURIComponent(document.getElementById('inlineFormInputName2').value)
+    const position = encodeURIComponent(document.getElementById('inlineFormInputGroupUsername2').value)
+    console.log(company, position)
+      
+      const response = await fetch('http://localhost:5000/api/v1/jobs', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          company: company,
+          position: position,
+        }),
+      })
+      const data = await response.json()
+      getalljobs()
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const editJob = async (position, company, status, noteID) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/v1/jobs/${noteID}`, {
+        method: 'GET',
+        headers: {
+          "Content-type": "application/json",
+          Authorization: localStorage.getItem('token')
+        },
+      })
+      navigate(`/api/v1/jobs/:id`)
+      const data = await response.json()
+      setposition(data.job.position)
+      setcompany(data.job.company)
+      setstatus(data.job.status)
+      setid(noteID)
+      console.log(data.job)
+      
+    } catch (error) {
+      console.log(error)
+    }
+    }
   return (
     <>
     <Delete/>
+
     <div style={{marginLeft: '280px'}}>
                 <form className="form-inline">
                     <div className='row'>
@@ -23,12 +114,12 @@ export default function Body() {
                             </div>
                         </div>
                         <div className='col-6 col-md-4'>
-                            <button type="submit" className="btn btn-primary mb-2 w-25">Add</button>
+                            <button type='button' onClick={addJob} className="btn btn-primary mb-2 w-25">Add</button>
                         </div>
                     </div>
                 </form>
             </div>
-    
+    {jobs.count == 0 ? <h3 style={{textAlign: 'center', marginTop: '40px'}}>You have no jobs to display currently</h3>: 
     <div style={{ marginLeft: '100px', marginRight: '100px', marginTop: '40px' }} className='
       shadow-lg p-3 bg-body-tertiary rounded table-responsive'>
 
@@ -45,33 +136,23 @@ export default function Body() {
           </tr>
         </thead>
         <tbody className='table-group-divider'>
-          <tr>
+          {/* {jobs.count == '0' ? <div>You have no jobs to display currently</div>:   */}
+          {jobs.jobs.map((item)=>{
+              
+            return <tr key={item._id}>
             <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td><a  href='/api/v1/jobs/:id'><img src={edit} /></a><a style={{marginLeft:'50px'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><img src={trash} /></a></td>
+            <td>{decodeURIComponent(item.position)}</td>
+            <td>{decodeURIComponent(item.company)}</td>
+            <td>{item.createdAt}</td>
+            <td>{item.status}</td>
+            <td><Link onClick={()=>editJob(item.position, item.company, item.status, item._id)} ><img src={edit} /></Link><a style={{marginLeft:'50px'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><img src={trash} /></a></td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td><a  href='/edit'><img src={edit} /></a><a style={{marginLeft:'50px'}} href='/delete'><img src={trash} /></a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td><a  href='/edit'><img src={edit} /></a><a style={{marginLeft:'50px'}} href='/delete'><img src={trash} /></a></td>
-          </tr>
+          })
+          }
+          
         </tbody>
       </table>
-    </div>
+    </div>}
     </>
   )
 }
