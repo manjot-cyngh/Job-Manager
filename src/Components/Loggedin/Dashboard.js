@@ -95,6 +95,11 @@ export default function Body() {
       console.log(error)
     }
     }
+
+    const deleteJob = async (id) => {
+      setid(id)
+      // navigate('/api/v1/jobs/:id')
+    }
   return (
     <>
     <Delete/>
@@ -145,7 +150,7 @@ export default function Body() {
             <td>{decodeURIComponent(item.company)}</td>
             <td>{item.createdAt}</td>
             <td>{item.status}</td>
-            <td><Link onClick={()=>editJob(item.position, item.company, item.status, item._id)} ><img src={edit} /></Link><a style={{marginLeft:'50px'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><img src={trash} /></a></td>
+            <td><Link onClick={()=>editJob(item.position, item.company, item.status, item._id)} ><img src={edit} /></Link><Link onClick={()=>deleteJob(item._id)} style={{marginLeft:'50px'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><img src={trash} /></Link></td>
           </tr>
           })
           }

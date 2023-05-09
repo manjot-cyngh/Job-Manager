@@ -29,7 +29,9 @@ export default function Edit() {
         try {
             const company = encodeURIComponent(document.getElementById('inlineFormInputName2').value)
     const position = encodeURIComponent(document.getElementById('inlineFormInputGroupUsername2').value)
-    console.log(company, position)
+    const selected = document.getElementById('statusselect')
+    const text = selected.options[selected.selectedIndex].text
+    console.log(company, position, selected)
             const response = await fetch(`http://localhost:5000/api/v1/jobs/${id}` , {
                 method: 'PATCH',
                 headers: {
@@ -39,10 +41,12 @@ export default function Edit() {
                 body: JSON.stringify({
                     company: company,
                     position: position,
+                    status: text,
                 })
             })
             const data = await response.json()
             console.log(data)
+            navigate(-1)
         } catch (error) {
             console.log(error)
         }
@@ -55,7 +59,8 @@ export default function Edit() {
                 style={{ display: 'inline-block', position: 'initial' }}
             >
                 <Modal.Dialog style={{}}>
-                    <Modal.Header closeButton style={{}}>
+                    {/* <Modal.Header closeButton style={{}}> */}
+                    <Modal.Header  style={{}}>
                         <Modal.Title>Update Job Preferences</Modal.Title>
                     </Modal.Header>
 
@@ -66,16 +71,16 @@ export default function Edit() {
                                 <div className='row'>
                                     <div className='col-6 col-md-4'>
                                         <label className="sr-only" htmlFor="inlineFormInputName2">Name</label>
-                                        <input type="text" className="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Company" value={company} onChange={onChangeC}/>
+                                        <input type="text" className="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Company" value={decodeURIComponent(company)} onChange={onChangeC}/>
                                     </div>
                                     <div className='col-6 col-md-4'>
                                         <label className="sr-only" htmlFor="inlineFormInputGroupUsername2">Username</label>
                                         <div className="input-group mb-2 mr-sm-2">
 
-                                            <input type="text" className="form-control" id="inlineFormInputGroupUsername2" placeholder="Position" value={position} onChange={onChangeP}/>
+                                            <input type="text" className="form-control" id="inlineFormInputGroupUsername2" placeholder="Position" value={decodeURIComponent(position)} onChange={onChangeP}/>
                                         </div>
                                     </div>
-                                    <select className="form-select w-25" aria-label="Default select example" style={{ height: '34px' }}>
+                                    <select className="form-select w-25" aria-label="Default select example" style={{ height: '34px', fontSize: '15px' }} id='statusselect'>
                                         {/* <option defaultValue={status}>{status}</option> */}
                                         <option value="1">Pending</option>
                                         <option value="2">Interview</option>
