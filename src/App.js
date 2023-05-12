@@ -21,6 +21,8 @@ export const createcompanycontext = createContext(null)
 export const createstatuscontext = createContext(null)
 export const createidcontext = createContext(null)
 
+export const createusercontext = createContext(null)
+
 // export const create
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
   const [status, setstatus] = useState(0)
   const [id, setid] = useState(0)
 
+  const [user, setuser] = useState('')
+
   return (
 
     <createdatacontext.Provider value={{ jobs, setjobs }}>
@@ -38,6 +42,7 @@ function App() {
         <createcompanycontext.Provider value={{ company, setcompany }}>
           <createstatuscontext.Provider value={{ status, setstatus }}>
           <createidcontext.Provider value={{ id, setid }}>
+          <createusercontext.Provider value={{ user, setuser }}>
 
 
             <BrowserRouter>
@@ -53,6 +58,7 @@ function App() {
                 {/* <Delete/> */}
               </Routes>
             </BrowserRouter>
+            </createusercontext.Provider>
             </createidcontext.Provider>
           </createstatuscontext.Provider>
         </createcompanycontext.Provider>

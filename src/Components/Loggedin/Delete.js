@@ -67,7 +67,8 @@ export default function Delete() {
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body">
-        You are about to delete the following job data. Do you still wish to proceed?
+        {/* You are about to delete your job data for {}. Do you still wish to proceed? */}
+        You are about to delete your job application data. Do you still wish to proceed?
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

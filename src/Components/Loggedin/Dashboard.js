@@ -1,6 +1,8 @@
 import React, {useContext, useEffect} from 'react'
 import edit from '../../Assets/edit.svg'
 import trash from '../../Assets/trash.svg'
+import img from '../../Assets/no-job.jpg'
+import image from '../../Assets/no-jobs.jpg'
 import Delete from './Delete'
 import { createdatacontext } from '../../App'
 import { Link, useNavigate } from 'react-router-dom'
@@ -100,6 +102,12 @@ export default function Body() {
       setid(id)
       // navigate('/api/v1/jobs/:id')
     }
+
+    // const eidtdate = async (date) => {
+    //   let editeddate = 
+    //   return editeddate
+    // }
+
   return (
     <>
     <Delete/>
@@ -124,7 +132,12 @@ export default function Body() {
                     </div>
                 </form>
             </div>
-    {jobs.count == 0 ? <h3 style={{textAlign: 'center', marginTop: '40px'}}>You have no jobs to display currently</h3>: 
+    {jobs.count == 0 ? 
+    <> 
+    <h3 style={{textAlign: 'center', marginTop: '40px',zIndex: '10', marginBottom:'0px'}}>You have no jobs to display currently</h3>
+    <img src={img} style={{height:'38%', width:'38%', marginLeft:'450px', marginTop: '-1px',zIndex: '1' }}/>
+    {/* <img src={image} style={{height:'38%', width:'38%', marginLeft:'450px', marginTop: '-1px',zIndex: '1' }}/> */}
+   </> : 
     <div style={{ marginLeft: '100px', marginRight: '100px', marginTop: '40px' }} className='
       shadow-lg p-3 bg-body-tertiary rounded table-responsive'>
 
@@ -148,7 +161,7 @@ export default function Body() {
             <th scope="row">1</th>
             <td>{decodeURIComponent(item.position)}</td>
             <td>{decodeURIComponent(item.company)}</td>
-            <td>{item.createdAt}</td>
+            <td>{(item.createdAt).slice(0, 10)}</td>
             <td>{item.status}</td>
             <td><Link onClick={()=>editJob(item.position, item.company, item.status, item._id)} ><img src={edit} /></Link><Link onClick={()=>deleteJob(item._id)} style={{marginLeft:'50px'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><img src={trash} /></Link></td>
           </tr>

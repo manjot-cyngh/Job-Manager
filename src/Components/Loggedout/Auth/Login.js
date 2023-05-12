@@ -2,9 +2,10 @@ import React, {useContext} from 'react';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import Title from '../Title'
 import { Link, useNavigate } from 'react-router-dom';
-import { createdatacontext } from '../../../App';
+import { createdatacontext, createusercontext } from '../../../App';
 
 export default function App() {
+  const {user, setuser} = useContext(createusercontext)
   const {jobs, setjobs} = useContext(createdatacontext)
   const host = 'http//localhost:5000'
   let navigate = useNavigate()
@@ -27,6 +28,12 @@ export default function App() {
       })
       const data = await response.json()
       const token = data.token
+      const usernamae = data.user.name
+      setuser(usernamae)
+      setuser((state) => {
+        console.log(state); 
+        return state;
+      });
       console.log(data)
       console.log(token)
       if(token){
